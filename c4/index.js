@@ -1,121 +1,36 @@
 var http = require('http');
-
-// users datastore
-var DATA = [];
-
-function URLToRegex(url) {
-    var output = url.replace(new RegExp('/', 'g'), '\\/')
-        .replace(new RegExp('{num}', 'g'), '[0-9]+')
-        .replace(new RegExp('{alnum}', 'g'), '[a-z0-9]+')
-        .replace(new RegExp('{alpha}', 'g'), '[a-z]+')
-
-    return '^' + output + '$';
-}
+var controllers = require('./controllers');
+var utils = require('./utils');
 
 var routes = {GET: [], POST: [], PATCH: [], PUT: [], DELETE: []};
 
 // Get all users from the datastore
-routes.GET['/users'] = function (req, res) {
-    res.writeHead(200, 'OK');
-    res.end(JSON.stringify(DATA));
-};
-
+routes.GET['/users'] = controllers.GetAllUsers;
 // Get user by ID
-routes.GET['/users/{num}'] = function (req, res) {
-    var url = req.url.split('/');
-    var id = parseInt(url[url.length - 1]);
-
-    if(DATA[id] != undefined){
-        res.writeHead(200, 'OK');
-        res.end(JSON.stringify(DATA[id]));
-    } else {
-        res.writeHead(404, 'Not Found');
-        res.end('Not Found');
-    }
-};
-
+routes.GET['/users/{num}'] = controllers.GetSingleUser;
 // Create/add new user to the datastore
-routes.POST['/users'] = function (req, res) {
-    var d = '';
-
-    req.on('data', function(data){
-        d += data;
-    });
-
-    req.on('end', function(){
-        DATA.push(JSON.parse(d));
-        res.writeHead(200, 'OK');
-        res.end('POST USERS');
-    });
-};
-
+routes.POST['/users'] = controllers.AddUser;
 // Delete user from the datastore
-routes.DELETE['/users/{num}'] = function(req, res){
-    var url = req.url.split('/');
-    var id = parseInt(url[url.length - 1]);
-
-    if(DATA[id] != undefined){
-        // delete DATA[id];
-        DATA.splice(id, 1);
-        res.writeHead(200, 'OK');
-        res.end('');
-    } else {
-        res.writeHead(404, 'Not Found');
-        res.end('Not Found');
-    }
-}
-
+routes.DELETE['/users/{num}'] = controllers.DeleteUser;
 // Update complete user data
-routes.PUT['/users/{num}'] = function (req, res) {
-    var url = req.url.split('/');
-    var id = parseInt(url[url.length - 1]);
-    var d = '';
-
-    req.on('data', function (data) {
-        d += data;
-    });
-
-    req.on('end', function () {
-        if (DATA[id] != undefined) {
-            DATA[id] = JSON.parse(d);
-            res.writeHead(200, 'OK');
-            res.end('POST USERS');
-        } else {
-            res.writeHead(404, 'Not Found');
-            res.end('Not Found');
-        }
-    });
-}
-
+routes.PUT['/users/{num}'] = controllers.EditUser;
 // Update part od user's data
-routes.PATCH['/users/{num}/(firstname|lastname|birtdate|password|email)'] = function (req, res) {
-    var d = '';
-    var url = req.url.split('/');
-
-    var id = parseInt(url[url.length - 2]);
-    var property = url[url.length - 1];
-
-    req.on('data', function (data) {
-        d += data;
-    });
-
-    req.on('end', function () {
-        if (DATA[id] != undefined && JSON.parse(d)[property] != undefined) {
-            DATA[id][property] = JSON.parse(d)[property];
-            res.writeHead(200, 'OK');
-            res.end('');
-        } else {
-            res.writeHead(404, 'Not Found');
-            res.end('Not Found');
-        }
-    });
-}
+routes.PATCH['/users/{num}/(firstname|lastname|birtdate|password|email)'] = controllers.UpdateUser;
 
 http.createServer(function (req, res) {
+
+    if(req.method == 'OPTIONS'){
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        res.end('');
+        return;
+    }
+
     var error = true;
 
     for(i in routes[req.method]){
-        var regex = new RegExp(URLToRegex(i));
+        var regex = new RegExp(utils.URLToRegex(i));
 
         if (regex.test(req.url)) {
             if (typeof routes[req.method][i] == 'function'){
