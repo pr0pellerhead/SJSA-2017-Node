@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Posts</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        html, body {
+            height: 100%;
+        }
+        header {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 40px;
+            background-color: darkgray;
+            border-bottom: 1px solid rgba(0, 0, 0, .2);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .3);
+        }
+        main {
+            width: 70%;
+            margin: 0 auto;
+        }
+        article {
+            border: 1px solid silver;
+            border-radius: 3px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: orangered;
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: gray;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <main>
+        {{#each posts}}
+        <article>
+            <h2>{{title}}</h2>
+            <p>{{body}}</p>
+        </article>
+        {{/each}}
+    </main>
+</body>
+</html>
