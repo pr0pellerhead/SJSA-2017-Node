@@ -12,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
     "mongoose": "^5.0.12",
     "node-config-yml": "^1.0.1",
     "node-yaml-config": "0.0.4"
