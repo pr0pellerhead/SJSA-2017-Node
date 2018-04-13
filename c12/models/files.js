@@ -18,6 +18,42 @@ var addFile = (fileData, cb) => {
     });
 }
 
+var deleteFile = (id, cb) => {
+    File.remove({_id: id}, (err) => {
+        if(err){
+            cb(err);
+            return;
+        }
+        cb(null);
+        return;
+    });
+}
+
+var getAllFiles = (cb) => {
+    File.find({}, (err, data) => {
+        if(err){
+            cb(err, null);
+            return;
+        }
+        cb(null, data);
+        return;
+    });
+}
+
+var getOneFile = (id, cb) => {
+    File.findOne({_id: id}, (err, data) => {
+        if (err) {
+            cb(err, null);
+            return;
+        }
+        cb(null, data);
+        return;
+    });
+}
+
 module.exports = {
-    addFile
+    addFile,
+    deleteFile,
+    getAllFiles,
+    getOneFile
 }

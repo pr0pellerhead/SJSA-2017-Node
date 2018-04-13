@@ -30,6 +30,14 @@ app.post("/api/users", userControllers.createUser);
 app.delete("/api/users/:id", userControllers.deleteUser);
 // manage file uploads
 app.post("/api/files", fileControllers.uploadFile);
+// get a list of all uploaded files
+app.get("/api/files", fileControllers.getAllFiles);
+// get a details of a single files
+app.get("/api/files/:id", fileControllers.getOneFile);
+// download specified file
+app.get("/api/files/:id/download", fileControllers.downloadFile);
+// delete a single file
+app.delete("/api/files/:id", fileControllers.deleteFile);
 
 app.listen(config("server").port, () => {
     console.log('Server started on port ' + config("server").port);
