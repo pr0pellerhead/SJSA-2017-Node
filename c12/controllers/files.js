@@ -4,7 +4,7 @@ const path = require('path');
 
 var uploadFile = (req, res) => {
     var file = req.files.dokument;
-    file.mv(__dirname + "/../uploads/" + file.name, (err) => {
+    file.mv(__dirname + "/../uploads/" + file.md5 + '_' + file.name, (err) => {
         if(err){
             console.error('Could not upload file!');
             return;
@@ -15,9 +15,17 @@ var uploadFile = (req, res) => {
             mime: file.mimetype,
             md5: file.md5
         };
-        FileModel.addFile(fileData);
+        FileModel.addFile(fileData, function(err){
+            if(err){
+                res.status(500);
+                res.send("Internal server error");
+                return;
+            }
+            res.status(200);
+            res.send("OK");
+            return;
+        });
     });
-    res.send("ok");
 }
 
 var getAllFiles = (req, res) => {
@@ -72,12 +80,20 @@ var deleteFile = (req, res) => {
 }
 
 var downloadFile = (req, res) => {
-    // *************************
-    // download logic goes here!
-    // *************************
-    res.status(200);
-    res.send("OK");
-    return; 
+    FileModel.getOneFile(req.params.id, function(err, data){
+        if(err){
+            res.status(500);
+            res.send("Internal server error. Could not find file in database.");
+            return; 
+        }
+        res.download(path.join(__dirname, "/../uploads/", data.object_name), data.file_name, function (err) {
+            if (err) {
+                res.status(500);
+                res.send("Internal server error. Could not find file on storage.");
+                return; 
+            }
+        });
+    });
 }
 
 module.exports = {
