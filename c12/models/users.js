@@ -63,9 +63,21 @@ var remove = (id, cb) => {
     });
 }
 
+var userLogin = (email, password, cb) => {
+    User.findOne({email: email, password: password}, (err, data) => {
+        if(err){
+            cb(err, null);
+            return;
+        }
+        cb(null, data);
+        return;
+    });
+}
+
 module.exports = {
     getAll,
     getOne,
     create,
-    remove
+    remove,
+    userLogin
 }

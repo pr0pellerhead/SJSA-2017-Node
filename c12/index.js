@@ -4,9 +4,12 @@ var bodyParser = require("body-parser");
 var config = require("./config");
 var DB = require("./config/db");
 const fileUpload = require('express-fileupload');
+var jwt = require('express-jwt');
+
 
 var userControllers = require("./controllers/users");
 var fileControllers = require("./controllers/files");
+var loginControllers = require("./controllers/login");
 
 DB.Init();
 
@@ -14,6 +17,12 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.use(fileUpload());
+
+var jwtCheck = () => {
+    return jwt({ secret: config("jwt_secret")});
+}
+
+
 
 
 /*************************************/
@@ -38,6 +47,21 @@ app.get("/api/files/:id", fileControllers.getOneFile);
 app.get("/api/files/:id/download", fileControllers.downloadFile);
 // delete a single file
 app.delete("/api/files/:id", fileControllers.deleteFile);
+// login
+app.post("/api/login", loginControllers.login);
+
+app.get("/api/token-test", jwtCheck(), (req, res) => {
+    console.log(req.user.uid);
+    console.log(req.user.email);
+    res.status(200);
+    res.send('OK');
+});
+
+app.use((err, req, res, next) => {
+    if (err.name == 'UnauthorizedError') {
+        res.send('Invalid token');
+    }
+});
 
 app.listen(config("server").port, () => {
     console.log('Server started on port ' + config("server").port);

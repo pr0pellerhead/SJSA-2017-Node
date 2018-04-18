@@ -13,6 +13,8 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.12",
     "node-config-yml": "^1.0.1",
     "node-yaml-config": "0.0.4"
