@@ -1,0 +1,13 @@
+default:
+  jwt_secret: t@jn@135
+  servers:
+    api-server:
+      port: 8000
+    auth-server:
+      port: 8100
+    upload-server:
+      port: 8200
+  database:
+    host: '127.0.0.1'
+    port: 27017
+    dbname: 'reactgram'
