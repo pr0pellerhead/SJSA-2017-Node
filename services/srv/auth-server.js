@@ -1,6 +1,7 @@
 var express = require("express");
 var cors = require("cors");
 var jwt = require('express-jwt');
+var bodyParser = require("body-parser")
 
 var config = require("../config");
 var DB = require("../config/db");
@@ -19,7 +20,7 @@ var jwtCheck = () => {
 
 app.post("/create", AuthUsersController.createUser);
 app.post("/login", AuthUsersController.login);
-app.get("/renew-token", AuthUsersController.renewToken);
+app.get("/renew-token", jwtCheck(), AuthUsersController.renewToken);
 
 app.use((err, req, res, next) => {
     if (err.name == 'UnauthorizedError') {

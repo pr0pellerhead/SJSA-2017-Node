@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 const User = mongoose.model('user', {
     fullname: String,
-    handle: String, // mandatory
+    handle: String, 
     email: String,
     password: String
 });
@@ -21,16 +21,29 @@ var checkUser = (email, handle) => {
 
 var createUser = (data) => {
     return new Promise((resolve, reject) => {
-        User.save({
-            fullname: data.fullname,
-            handle: data.handle,
-            email: data.email,
-            password: data.password
+        data.password = data.pwd1;
+        var user = new User(data);
+        user.save(function(err) {
+            if(err){
+                return reject(err);
+            }
+            return resolve();
         });
     });
 };
 
+var validateUser = (email, password, cb) => {
+    User.findOne({email: email, password: password}, function (err, data) {
+        if(err){
+            cb(err, null);
+            return;
+        }
+        cb(null, data);
+    });
+}
+
 module.exports = {
     checkUser,
-    createUser
+    createUser,
+    validateUser
 }
