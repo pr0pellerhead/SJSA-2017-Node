@@ -61,7 +61,8 @@ var login = (req, res) => {
             var claims = {
                 uid: data._id,
                 email: data.email,
-                handle: data.handle
+                handle: data.handle,
+                avatar: data.avatar
             };
             var token = jwt.sign(claims, config("jwt_secret"));
             res.status(200);
@@ -79,7 +80,8 @@ var renewToken = (req, res) => {
     var claims = {
         uid: req.user.uid,
         email: req.user.email,
-        handle: req.user.handle
+        handle: req.user.handle,
+        avatar: req.user.avatar,
     };
     var token = jwt.sign(claims, config("jwt_secret"));
     res.status(200);

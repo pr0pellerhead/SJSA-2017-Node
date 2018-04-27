@@ -1,0 +1,55 @@
+POSTS
+
+{
+    "_id": "",
+    "user": {
+        "id": "",
+        "handle": "",
+        "avatar": ""
+    },
+    "description": "",
+    "tags": ["", ""],
+    "picture": "",
+    "publish_date": "",
+    "deleted": true,
+    "likes": [
+        {"id": "", "handle": ""}
+    ]
+}
+
+COMMENTS
+
+{
+    "_id": "",
+    "post_id": "",
+    "publish_date": "",
+    "likes": [
+        {"id": "", "handle": ""}
+    ],
+    "comment": "",
+    "user": {
+        "id": "",
+        "handle": "",
+        "avatar": ""
+    }
+}
+
+
+POST ROUTES
+
+POST    /posts
+PATCH   /posts/:pid
+DELETE  /posts/:pid
+GET     /posts/:pid
+GET     /user/:uid/posts
+GET     /feed
+
+COMMENT ROUTES
+
+POST    /comments
+PATCH   /comments/:cid
+GET     /posts/:pid/comments
+DELETE  /comments/:cid
+
+
+

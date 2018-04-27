@@ -4,7 +4,8 @@ const User = mongoose.model('user', {
     fullname: String,
     handle: String, 
     email: String,
-    password: String
+    password: String,
+    avatar: String
 });
 
 var checkUser = (email, handle) => {
