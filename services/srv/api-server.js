@@ -6,6 +6,9 @@ var bodyParser = require("body-parser")
 var config = require("../config");
 var DB = require("../config/db");
 
+var PostController = require('../controllers/post/post');
+var CommentController = require('../controllers/comment/comment');
+
 DB.Init();
 
 var app = express();
@@ -17,19 +20,18 @@ var jwtCheck = () => {
 }
 
 // post routes
-app.post('/post', function(){});
-app.patch('/post/:pid', function(){});
-app.delete('/post/:pid', function(){});
-app.get('/post/:pid', function(){});
-app.get('/post/:uid/:pid', function(){});
-app.get('/feed', function(){});
+app.post('/post', jwtCheck(), PostController.createPost);
+app.patch('/post/:pid', jwtCheck(), PostController.updatePost);
+app.delete('/post/:pid', jwtCheck(), PostController.deletePost);
+app.get('/post/:pid', jwtCheck(), PostController.getPost);
+app.get('/feed/:uid', jwtCheck(), PostController.getAllUserPosts);
+app.get('/feed', jwtCheck(), PostController.getFeed);
 
 // comment routes
 app.post('/comments', function(){});
 app.patch('/comments/:cid', function(){});
 app.get('/comments/:pid/comments', function(){});
 app.delete('/comments/:cid', function(){});
-
 
 app.use((err, req, res, next) => {
     if (err.name == 'UnauthorizedError') {

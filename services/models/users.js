@@ -5,7 +5,21 @@ const User = mongoose.model('user', {
     handle: String, 
     email: String,
     password: String,
-    avatar: String
+    avatar: String,
+    followers: [
+        {
+            id: String,
+            handle: String,
+            avatar: String
+        }
+    ],
+    following: [
+        {
+            id: String,
+            handle: String,
+            avatar: String
+        }
+    ],
 });
 
 var checkUser = (email, handle) => {
