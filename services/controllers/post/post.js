@@ -6,9 +6,9 @@ var createPost = (req, res) => {
         var tags = [];
         var deleted = false;
         var publish_date = new Date();
-        if (req.body.description != unefined && req.body.description.length){
+        if (req.body.description != undefined && req.body.description.length > 0){
             description = req.body.description;
-            tags = req.body.description.match(/#([a-z\-10-9]*)\ /g).map((t) => {
+            tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g).map((t) => {
                 return  t.replace('#', '').replace(' ', '');
             });
         }
@@ -36,9 +36,9 @@ var createPost = (req, res) => {
 };
 
 var updatePost = (req, res) => {
-    if (req.body.description != unefined && req.body.description.length && req.params.pid != undefined){
+    if (req.body.description != undefined && req.body.description.length > 0 && req.params.pid != undefined){
         description = req.body.description;
-        tags = req.body.description.match(/#([a-z\-10-9]*)\ /g).map((t) => {
+        tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g).map((t) => {
             return t.replace('#', '').replace(' ', '');
         });
         var data = {
@@ -116,7 +116,7 @@ var getAllUserPosts = (req, res) => {
 };
 
 var getFeed = (req, res) => {
-    
+
 };
 
 module.exports = {

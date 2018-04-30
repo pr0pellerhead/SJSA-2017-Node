@@ -32,7 +32,7 @@ var addPost = (data, cb) => {
 };
 
 var updatePost = (uid, pid, data, cb) => {
-    Post.updateOne({_id: id, 'user.id': uid}, {$set: {description: data.description, tags: data.tags}}, (err) => {
+    Post.updateOne({_id: pid, 'user.id': uid}, {$set: {description: data.description, tags: data.tags}}, (err) => {
         if (err) {
             cb(err);
             return;
