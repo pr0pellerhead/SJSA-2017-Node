@@ -34,7 +34,25 @@ var addPost = (data, cb) => {
 var updatePost = (uid, pid, data, cb) => {
     Post.updateOne({_id: pid, 'user.id': uid}, {$set: {description: data.description, tags: data.tags}}, (err) => {
         if (err) {
-            cb(err);
+            cb(err); var mongoose = require("mongoose");
+
+            const Comment = mongoose.model('comments', {
+                post_id: String,
+                publish_date: Date,
+                likes: [
+                    {
+                        id: String,
+                        handle: String
+                    }
+                ],
+                comment: String,
+                user: {
+                    id: String,
+                    handle: String,
+                    avatar: String
+                },
+                deleted: Boolean
+            });
             return;
         }
         cb(null);

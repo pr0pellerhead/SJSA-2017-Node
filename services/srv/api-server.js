@@ -28,10 +28,10 @@ app.get('/feed/:uid', jwtCheck(), PostController.getAllUserPosts);
 app.get('/feed', jwtCheck(), PostController.getFeed);
 
 // comment routes
-app.post('/comments', function(){});
-app.patch('/comments/:cid', function(){});
-app.get('/comments/:pid/comments', function(){});
-app.delete('/comments/:cid', function(){});
+app.post('/post/:pid/comments', jwtCheck(), CommentController.createComment);
+app.patch('/comments/:cid', jwtCheck(), CommentController.updateComment);
+app.delete('/comments/:cid', jwtCheck(), CommentController.deleteComment);
+app.get('/post/:pid/comments', jwtCheck(), CommentController.getPostComments);
 
 app.use((err, req, res, next) => {
     if (err.name == 'UnauthorizedError') {

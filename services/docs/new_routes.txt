@@ -1,0 +1,8 @@
+PATCH /user/change-password
+PATCH /user/avatar
+PATCH /user/handle
+PATCH /user/:uid/follow
+PATCH /user/:uid/unfollow
+GET /user/:uid/followers
+GET /user/:uid/following
+
