@@ -88,8 +88,116 @@ var renewToken = (req, res) => {
     res.json({ token: token });
 }
 
+var changePassword = (req, res) => {
+    var isValid = req.body.old_pwd != undefined 
+        && req.body.pwd1 != undefined && req.body.pwd1.length > 0
+        && req.body.pwd2 != undefined && req.body.pwd2.length > 0
+        && req.body.pwd1 == req.body.pwd2;
+    if(isValid){
+        UserModel.changePassword(req.user.uid, old_pwd, pwd1, function(err){
+            if(err){
+                res.status(500);
+                res.send('Internal server error');
+                return;
+            }
+            res.status(200);
+            res.send('OK');
+            return;
+        })
+    } else {
+        res.status(400);
+        res.send('Bad request');
+        return;
+    }
+}
+
+var changeAvatar = (req, res) => {
+    var isValid = req.body.avatar != undefined && req.body.avatar.length > 0;
+    if(isValid){
+        UserModel.changeAvatar(req.user.uid, avatar, function(err){
+            if (err) {
+                res.status(500);
+                res.send('Internal server error');
+                return;
+            }
+            res.status(200);
+            res.send('OK');
+            return;
+        });
+    } else {
+        res.status(400);
+        res.send('Bad request');
+    }
+}
+
+var changeHandle = (req, res) => {
+    var isValid = req.body.handle != undefined && req.body.handle.length > 0;
+    if (isValid) {
+        UserModel.changeHandle(req.user.uid, handle, function (err) {
+            if (err) {
+                res.status(500);
+                res.send('Internal server error');
+                return;
+            }
+            res.status(200);
+            res.send('OK');
+            return;
+        });
+    } else {
+        res.status(400);
+        res.send('Bad request');
+    }
+}
+
+var follow = (req, res) => {
+    var isValid = req.params.uid != undefined && req.params.uid.length > 0;
+    if(isValid){
+        var data = {
+            uid: req.user.uid,
+            avatar: req.user.avatar,
+            handle: req.user.handle,
+        };
+        
+    } else {
+        res.status(400);
+        res.send('Bad request');
+    }
+}
+
+var unfollow = (req, res) => {
+    var isValid = req.params.uid != undefined && req.params.uid.length > 0;
+    if (isValid) {
+        var data = {
+            uid: req.user.uid,
+            avatar: req.user.avatar,
+            handle: req.user.handle,
+        };
+        
+    } else {
+        res.status(400);
+        res.send('Bad request');
+    }
+}
+
+var followers = (req, res) => {
+    res.status(200);
+    res.send('OK');
+}
+
+var following = (req, res) => {
+    res.status(200);
+    res.send('OK');
+}
+
 module.exports = {
     createUser,
     login,
-    renewToken
+    renewToken,
+    changePassword,
+    changeAvatar,
+    changeHandle,
+    follow,
+    unfollow,
+    followers,
+    following,
 }

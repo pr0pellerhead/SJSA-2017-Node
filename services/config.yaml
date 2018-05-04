@@ -7,6 +7,8 @@ default:
       port: 8100
     upload-server:
       port: 8200
+    user-server:
+      port: 8300
   database:
     host: '127.0.0.1'
     port: 27017

@@ -57,8 +57,91 @@ var validateUser = (email, password, cb) => {
     });
 }
 
+var changePassword = (id, old_pwd, new_pwd, cb) => {
+    User.update({_id: id, password: old_pwd}, {$set: {password: new_pwd}}, function(err){
+        if(err){
+            cb(err);
+            return;
+        }
+        cb(null);
+        return;
+    });
+};
+
+var changeAvatar = (id, avatar, cb) => {
+    User.update({_id: id}, {$set: {avatar: avatar}}, function(err){
+        if (err) {
+            cb(err);
+            return;
+        }
+        cb(null);
+        return;
+    });
+};
+
+var changeHandle = (id, handle, cb) => {
+    User.update({_id: id}, {$set: {handle: handle}}, function(err){
+        if (err) {
+            cb(err);
+            return;
+        }
+        cb(null);
+        return;
+    });
+};
+
+var follow = (id, data, cb) => {
+    return new Promise(function(resolve, reject){
+        User.update({_id: id}, {$addToSet: {followers: data}}, function(err){
+            if (err) {
+                return reject(err);
+            }
+            return resolve(null);
+        });
+    })
+};
+
+var following = (id, data, cb) => {
+    return new Promise(function (resolve, reject) {
+        User.update({ _id: id }, { $addToSet: { following: data } }, function (err) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(null);
+        });
+    })
+};
+
+var unfollow = (id, data, cb) => {
+    return new Promise(function(resolve, reject){
+        User.update({_id: id}, {$pull: {followers: data}}, function(err){
+            if (err) {
+                return reject(err);
+            }
+            return resolve(null);
+        });
+    })
+};
+
+var unfollowing = (id, data, cb) => {
+    return new Promise(function (resolve, reject) {
+        User.update({ _id: id }, { $pull: { following: data } }, function (err) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(null);
+        });
+    })
+};
+
 module.exports = {
     checkUser,
     createUser,
-    validateUser
+    validateUser,
+    changePassword,
+    changeAvatar,
+    follow,
+    unfollow,
+    following,
+    unfollowing,
 }
