@@ -134,6 +134,17 @@ var unfollowing = (id, data, cb) => {
     })
 };
 
+var getFollowing = (uid, cb) => {
+    return new Promise(function (resolve, reject) {
+        User.findOne({_id: uid}, {following: 1}, function (err, data) {
+            if (err){
+                return reject(err);
+            }
+            return resolve(data);
+        });
+    })
+};
+
 module.exports = {
     checkUser,
     createUser,
@@ -144,4 +155,5 @@ module.exports = {
     unfollow,
     following,
     unfollowing,
+    getFollowing,
 }

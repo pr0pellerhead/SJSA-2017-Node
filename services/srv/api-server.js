@@ -39,6 +39,6 @@ app.use((err, req, res, next) => {
     }
 });
 
-app.listen(config("servers")['auth-server'].port, () => {
-    console.log('Server started on port ' + config("servers")['auth-server'].port);
+app.listen(config("servers")['api-server'].port, () => {
+    console.log('Server started on port ' + config("servers")['api-server'].port);
 });

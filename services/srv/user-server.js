@@ -6,7 +6,7 @@ var bodyParser = require("body-parser")
 var config = require("../config");
 var DB = require("../config/db");
 
-var UsersController = require('../controllers/auth/users');
+var UsersController = require('../controllers/auth/user');
 
 DB.Init();
 

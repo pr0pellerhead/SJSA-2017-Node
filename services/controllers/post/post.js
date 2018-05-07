@@ -1,4 +1,5 @@
 var PostModel = require('../../models/posts');
+var UserModel = require('../../models/users');
 
 var createPost = (req, res) => {
     if(req.body.picture != undefined && req.body.picture.length > 0){
@@ -116,7 +117,23 @@ var getAllUserPosts = (req, res) => {
 };
 
 var getFeed = (req, res) => {
-
+    UserModel.getFollowing(req.user.uid)
+    .then(function(data) {        
+        var ids = [];
+        var i = data.length;
+        while(i--){
+            ids.push(data[i].uid);
+        }
+        return PostModel.getFollowingPost(ids);
+    })
+    .then(function (data) {
+        res.status(200);
+        res.json(data);
+    })
+    .catch(function(err){
+        res.status(500);
+        res.send('Internal server error');
+    })
 };
 
 module.exports = {

@@ -93,10 +93,23 @@ var getAllUserPosts = (uid, cb) => {
     });
 }
 
+var getFollowingPost = (ids) => {
+    return new Promise (function (resolve, reject) {
+        Post.find({ "user.uid": { $in: ids } }, {}, { sort: { publish_date: -1 } }, (err, data) => {
+            if (err) {
+                return reject(err);
+            }          
+            return resolve(data);
+        });
+    })
+}
+
+
 module.exports = {
     addPost,
     updatePost,
     deletePost,
     getPost,
     getAllUserPosts,
+    getFollowingPost
 }
