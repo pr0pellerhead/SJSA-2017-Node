@@ -79,7 +79,6 @@ var login = (req, res) => {
 var renewToken = (req, res) => {
     var claims = {
         uid: req.user.uid,
-        email: req.user.email,
         handle: req.user.handle,
         avatar: req.user.avatar,
     };
@@ -93,8 +92,10 @@ var changePassword = (req, res) => {
         && req.body.pwd1 != undefined && req.body.pwd1.length > 0
         && req.body.pwd2 != undefined && req.body.pwd2.length > 0
         && req.body.pwd1 == req.body.pwd2;
-    if(isValid){
-        UserModel.changePassword(req.user.uid, old_pwd, pwd1, function(err){
+
+        
+        if(isValid){
+            UserModel.changePassword(req.user.uid, req.body.old_pwd, req.body.pwd1, function(err){
             if(err){
                 res.status(500);
                 res.send('Internal server error');
@@ -113,8 +114,9 @@ var changePassword = (req, res) => {
 
 var changeAvatar = (req, res) => {
     var isValid = req.body.avatar != undefined && req.body.avatar.length > 0;
+    console.log (isValid)
     if(isValid){
-        UserModel.changeAvatar(req.user.uid, avatar, function(err){
+        UserModel.changeAvatar(req.user.uid, req.body.avatar, function(err){
             if (err) {
                 res.status(500);
                 res.send('Internal server error');
@@ -133,7 +135,8 @@ var changeAvatar = (req, res) => {
 var changeHandle = (req, res) => {
     var isValid = req.body.handle != undefined && req.body.handle.length > 0;
     if (isValid) {
-        UserModel.changeHandle(req.user.uid, handle, function (err) {
+        UserModel.changeHandle(req.user.uid, req.body.handle, function (err) {
+            console.log(isValid);
             if (err) {
                 res.status(500);
                 res.send('Internal server error');

@@ -1,5 +1,5 @@
 #!/bin/bash
-nohup node srv/api-server.js &
-nohup node srv/auth-server.js &
-nohup node srv/upload-server.js &
-nohup node srv/user-server.js &
+nodemon srv/api-server.js & >> nohup.out
+nodemon srv/auth-server.js & >> nohup.out
+nodemon srv/upload-server.js & >> nohup.out
+nodemon srv/user-server.js & >> nohup.out

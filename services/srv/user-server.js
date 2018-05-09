@@ -18,13 +18,13 @@ var jwtCheck = () => {
     return jwt({ secret: config("jwt_secret") });
 }
 
-app.patch('/user/change-password', UsersController.changePassword);
-app.patch('/user/avatar', UsersController.changeAvatar);
-app.patch('/user/handle', UsersController.changeHandle);
-app.patch('/user/:uid/follow', UsersController.follow);
-app.patch('/user/:uid/unfollow', UsersController.unfollow);
-app.get('/user/:uid/followers', UsersController.followers);
-app.get('/user/:uid/following', UsersController.following);
+app.patch('/user/change-password', jwtCheck(), UsersController.changePassword);
+app.patch('/user/avatar', jwtCheck(), UsersController.changeAvatar);
+app.patch('/user/handle', jwtCheck(), UsersController.changeHandle);
+app.patch('/user/:uid/follow', jwtCheck(), UsersController.follow);
+app.patch('/user/:uid/unfollow', jwtCheck(), UsersController.unfollow);
+app.get('/user/:uid/followers', jwtCheck(), UsersController.followers);
+app.get('/user/:uid/following', jwtCheck(), UsersController.following);
 
 app.use((err, req, res, next) => {
     if (err.name == 'UnauthorizedError') {

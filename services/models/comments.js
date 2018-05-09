@@ -11,7 +11,7 @@ const Comment = mongoose.model('comments', {
     ],
     comment: String,
     user: {
-        id: String,
+        uid: String,
         handle: String,
         avatar: String
     },
@@ -31,7 +31,7 @@ var addComment = (data, cb) => {
 }
 
 var updateComment = (cid, comment, uid, cb) => {
-    Comment.updateOne({'user.id': uid, _id: cid}, {$set: {comment: comment}}, function(err){
+    Comment.updateOne({'user.uid': uid, _id: cid}, {$set: {comment: comment}}, function(err){
         if(err){
             cb(err);
             return;
@@ -42,7 +42,7 @@ var updateComment = (cid, comment, uid, cb) => {
 }
 
 var deleteComment = (cid, uid, cb) => {
-    Comment.deleteOne({_id: cid, 'user.id': uid}, function(err){
+    Comment.deleteOne({_id: cid, 'user.uid': uid}, function(err){
         if(err){
             cb(err);
             return;

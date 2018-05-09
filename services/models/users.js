@@ -58,6 +58,7 @@ var validateUser = (email, password, cb) => {
 }
 
 var changePassword = (id, old_pwd, new_pwd, cb) => {
+    console.log('pero');
     User.update({_id: id, password: old_pwd}, {$set: {password: new_pwd}}, function(err){
         if(err){
             cb(err);
@@ -156,4 +157,5 @@ module.exports = {
     following,
     unfollowing,
     getFollowing,
+    changeHandle
 }

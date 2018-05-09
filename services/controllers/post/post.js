@@ -9,10 +9,18 @@ var createPost = (req, res) => {
         var publish_date = new Date();
         if (req.body.description != undefined && req.body.description.length > 0){
             description = req.body.description;
-            tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g).map((t) => {
-                return  t.replace('#', '').replace(' ', '');
-            });
+             tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g);
+            if(tags){
+                tags = tags.map((t) => {
+                    return t.replace('#', '').replace(' ', '');
+                });
+            } else {
+                tags = [];
+            }
         }
+
+        console.log(req.user);
+
         var data = {
             user: req.user,
             description: description,
@@ -39,13 +47,18 @@ var createPost = (req, res) => {
 var updatePost = (req, res) => {
     if (req.body.description != undefined && req.body.description.length > 0 && req.params.pid != undefined){
         description = req.body.description;
-        tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g).map((t) => {
-            return t.replace('#', '').replace(' ', '');
-        });
+        tags = req.body.description.match(/#([a-z\-_A-Z0-9]*)\ /g);
+        if(tags){
+            tags = tags.map((t) => {
+                return t.replace('#', '').replace(' ', '');
+            });
+        } else {
+            tags = [];
+        }
         var data = {
             description: description,
             tags: tags
-        }
+        };
         PostModel.updatePost(req.user.uid, req.params.pid, data, (err) => {
             if (err) {
                 res.status(500);

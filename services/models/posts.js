@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 const Post = mongoose.model('posts', {
     user: {
-        id: String,
+        uid: String,
         handle: String,
         avatar: String
     },
@@ -61,7 +61,7 @@ var updatePost = (uid, pid, data, cb) => {
 };
 
 var deletePost = (uid, pid, cb) => {
-    Post.updateOne({_id: pid, 'user.id': uid}, {$set: {deleted: true}}, (err) => {
+    Post.updateOne({_id: pid, 'user.uid': uid}, {$set: {deleted: true}}, (err) => {
         if (err) {
             cb(err);
             return;
