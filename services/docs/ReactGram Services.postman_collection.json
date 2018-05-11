@@ -1,0 +1,710 @@
+{
+	"info": {
+		"name": "ReactGram Services",
+		"_postman_id": "abb202aa-df05-417a-b564-3497e8a2537e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth - Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"fullname\": \"Test Test\",\n\t\"email\": \"test@test.com\",\n\t\"pwd1\": \"test123\",\n\t\"pwd2\": \"test123\",\n\t\"handle\": \"TeSt\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8100/create",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8100",
+					"path": [
+						"create"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test@test.com\",\n\t\"password\": \"test123\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8100/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8100",
+					"path": [
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Renew Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8100/renew-token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8100",
+					"path": [
+						"renew-token"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Upload - Upload Image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8200/upload",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8200",
+					"path": [
+						"upload"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Post Image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"picture\": \"http://127.0.0.1/slika.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Update Post",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"description\": \"some description, blah blah blah...\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post/5af336adac391612341803b0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5af336adac391612341803b0"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Delete Post",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post/5af336adac391612341803b0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5af336adac391612341803b0"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Get Single Post",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post/5af336adac391612341803b0",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5af336adac391612341803b0"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Get User Posts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiaWF0IjoxNTI1ODg4Mjk5fQ.ujf7Abvk7a6JIS36i2HZ7OHWvhfDBPyIfNiHin1vSlQ"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/feed/5af0affb35bb84200065f1c3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"feed",
+						"5af0affb35bb84200065f1c3"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Get Own Feed",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/feed",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"feed"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Post Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\": \"Komentar1\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post/5af33ca72b794f224edb8438/comments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5af33ca72b794f224edb8438",
+						"comments"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Update Comment",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"comment\": \"updatenaKomentari\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:8000/comments/5af33f8b2b7cfc239dd90153",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"comments",
+						"5af33f8b2b7cfc239dd90153"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Delete Comment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/comments/5af33f8b2b7cfc239dd90153",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"comments",
+						"5af33f8b2b7cfc239dd90153"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Get Post Comments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/post/5af33c115bc4b7216d1b9190/comments",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"post",
+						"5af33c115bc4b7216d1b9190",
+						"comments"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Change Password",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"old_pwd\": \"test123\",\n\t\"pwd1\": \"tost222\",\n\t\"pwd2\": \"tost222\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8300/user/change-password",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"change-password"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Change Avatar",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"avatar\": \"slika.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8300/user/avatar",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"avatar"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Change Handle",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"handle\": \"Ljubica\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8300/user/handle",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"handle"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Follow",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8300/user/5ade2a286ba5742615ab9476/follow",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"5ade2a286ba5742615ab9476",
+						"follow"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Unfollow",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:8300/user/5ade2a286ba5742615ab9476/unfollow",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"5ade2a286ba5742615ab9476",
+						"unfollow"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User - Followers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8300/user/5ade2a286ba5742615ab9476/followers",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"5ade2a286ba5742615ab9476",
+						"followers"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "User -Following",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI1YWYwYWZmYjM1YmI4NDIwMDA2NWYxYzMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJoYW5kbGUiOiJUZVN0IiwiYXZhdGFyIjoicGVyby5qcGciLCJpYXQiOjE1MjU4OTAxOTJ9.Gknhmf65dz5lYoS4v50rkcNkxVBwzMnY_FjPEP3C__w"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "127.0.0.1:8300/user/5ade2a286ba5742615ab9476/following",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8300",
+					"path": [
+						"user",
+						"5ade2a286ba5742615ab9476",
+						"following"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

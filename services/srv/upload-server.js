@@ -3,6 +3,7 @@ var cors = require("cors");
 var jwt = require('express-jwt');
 var bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload');
+var morgan = require('morgan');
 
 var config = require("../config");
 var DB = require("../config/db");
@@ -14,6 +15,7 @@ DB.Init();
 var app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('combined'));
 app.use(fileUpload({
     limits: { fileSize: 5 * 1024 * 1024 },
 }));

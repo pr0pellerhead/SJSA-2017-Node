@@ -1,7 +1,8 @@
 var express = require("express");
 var cors = require("cors");
 var jwt = require('express-jwt');
-var bodyParser = require("body-parser")
+var bodyParser = require("body-parser");
+var morgan = require('morgan');
 
 var config = require("../config");
 var DB = require("../config/db");
@@ -14,6 +15,7 @@ DB.Init();
 var app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('combined'));
 
 var jwtCheck = () => {
     return jwt({ secret: config("jwt_secret") });
