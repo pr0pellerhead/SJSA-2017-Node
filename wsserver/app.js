@@ -1,5 +1,12 @@
+var express = require("express");
 const WebSocket = require('ws');
 
+// web server
+app = express();
+app.use('/', express.static('wsserver/public'));
+app.listen(8000);
+
+// web socket server
 const wss = new WebSocket.Server({
     port: 8080,
     perMessageDeflate: {
@@ -17,20 +24,80 @@ const wss = new WebSocket.Server({
 var connections = [];
 
 wss.on('connection', function connection(ws) {
-    connections.push(ws);
-    ws.send('welcome');
+    var user = {
+        conn: ws,
+        handle: ''
+    };
+    connections.push(user);
+    var initMsg = {type: 'chat', data: 'welcome'};
+    ws.send(JSON.stringify(initMsg));
     ws.on('close', function close() {
         console.log('CLOSING CONNECTION');
     });
-    ws.on('message', sendMessage);
+    ws.on('message', onMessage);
 });
+
+var onMessage = function(msg){
+    var m = JSON.parse(msg);
+    switch (m.type){
+        case 'chat':
+            sendMessage(msg);
+            break;
+        case 'system':
+            systemMessage(m);
+            break;
+    }
+}
+
+var systemMessage = function(msg){
+    switch (msg.data.action){
+        case 'join':
+            console.log('NEW USER!');
+            addUserToList(msg.data.handle);
+            sendUsersList();
+            break;
+    }
+};
+
+var addUserToList = function(handle){
+    var l = connections.length;
+    while(l--){
+        if(connections[l].conn.readyState != 3 && connections[l].handle == ''){
+            connections[l].handle = handle;
+        }
+    }
+}
+
+var sendUsersList = function(){
+    // var list = connections.map(function(c){
+    //     if(c.conn.readyState != 3){
+    //         return c.handle;
+    //     }
+    // });
+    var list = [];
+    var l = connections.length;
+    while (l--) {
+        if (connections[l].conn.readyState != 3) {
+            list.push(connections[l].handle);
+        }
+    }
+    console.log(list);
+    var msg = {
+        type: 'system',
+        data: {
+            action: 'list',
+            data: list
+        }
+    };
+    sendMessage(JSON.stringify(msg));
+}
 
 var sendMessage = function(message) {
     console.log('received: %s', message);
     var l = connections.length;
     while (l--) {
-        if (connections[l].readyState != 3) {
-            connections[l].send(message);
+        if (connections[l].conn.readyState != 3) {
+            connections[l].conn.send(message);
         }
     }
 }
