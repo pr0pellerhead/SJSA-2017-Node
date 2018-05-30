@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .slider {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+        }
+            .slider-image-container {
+                height: 400px;
+                width: calc(400px * 4);
+                margin-left: 0;
+                transition: all .3s ease-in-out;
+                will-change: margin-left;
+            }
+
+                .slider-image-container img {
+                    width: 400px;
+                    height: 400px;  
+                    float: left;
+                }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slider-image-container">
+            <img src="images/1.jpg"/>
+            <img src="images/2.jpg"/>
+            <img src="images/3.jpg"/>
+            <img src="images/4.jpg"/>
+        </div>
+    </div>
+    <script>
+    var imageWidth = 400;
+    var container = document.querySelector('.slider-image-container');
+    var numImages = document.querySelectorAll('.slider-image-container img').length;
+    var currentMargin = 0;
+
+    setInterval(function(){
+        if(-(numImages - 1) * imageWidth) >= currentMargin){
+            currentMargin = 0;
+        } else {
+            currentMargin -= imageWidth;
+        }
+        container.style.marginLeft = currentMargin + 'px';
+    }, 4000);
+
+    </script>
+</body>
+</html>
